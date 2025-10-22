@@ -6,11 +6,13 @@
 Router1 — Router2 — Router3 (Triangle)
 
 ### ⚙️ Steps
+
 1. Divide `192.168.50.0/24` into four `/26` subnets.
-2. Assign subnets between routers.
-3. Configure interfaces using CLI.
-4. Verify with `show ip interface brief`.
-5. Enable static routes between routers.
+2. Create 3 routers in triangle topology using the router 2911.
+3. Assign subnets between routers. 
+4. Configure interfaces using CLI.
+5. Verify with `show ip interface brief`.
+6. Enable static routes between routers.
 
 ### 🔍 Verification
 - Routers can reach each other.
