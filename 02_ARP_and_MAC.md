@@ -14,8 +14,11 @@ PC1 — Switch — PC2
 1. Connect two PCs to a switch.
 2. Assign IPs to both PCs.
 3. On PC1, run `arp -a` to see empty cache.
-4. Ping PC2 and re-run `arp -a`.
-5. Observe ARP broadcast and reply in Simulation mode.
+-> Expected output : No ARP Entries Found
+5. Ping PC2 and re-run `arp -a`.
+6. Observe ARP broadcast and reply in Simulation mode.
+-> Internet Address      Physical Address      Type
+   192.168.10.2          00e0.f9dd.084c        dynamic
 
 ### 🔍 Verification
 - ARP table updates after ping.
