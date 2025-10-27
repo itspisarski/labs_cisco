@@ -117,6 +117,8 @@ Internet Address Physical Address Type
 
 ## 🧩 Topology 3 – Subnetting and IP Planning
 
+In this exercise we will start a new cisco packet tracer simulation.  
+> If you want you can save your previous topology to be able to quickly reload it latter if you need.
 
 ```
      [R1]
@@ -136,9 +138,11 @@ Internet Address Physical Address Type
    | C | 192.168.50.128/26 | .129 – .190 | .191 |
    | D | 192.168.50.192/26 | .193 – .254 | .255 |
 
-2. Create a **triangle topology** using **three 2911 routers**.  
-3. Assign one `/26` subnet to each router-to-router link.  
-4. Assign router interface IPs from each subnet (e.g., `.1` and `.2` per link).
+2. Create a **triangle topology** using **three 2911 routers**.
+3. On the bottom left panel, select Network Services, Routers
+4. Drag and drop 3 routers and connect them in triangle with Copper Cross-over cable
+5. Assign one `/26` subnet to each router-to-router link.  
+6. Assign router interface IPs from each subnet (e.g., `.1` and `.2` per link).
 
 ---
 
