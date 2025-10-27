@@ -59,7 +59,8 @@ If the ping fails:
 
 1. Switch to **Simulation Mode** in Packet Tracer.
 2. From **PC1**, open **Command Prompt** and send a ping to `192.168.1.2`.
-3. Watch the packet flow in the simulation pane:
+3. Watch the packet flow in the simulation pane on the right:
+- Use the arrows to advance the simulation, generating new events
 - Observe **ICMP encapsulation** inside **IP** and **Ethernet** frames.
 - Click each packet in the event list to view the **encapsulation details** at each OSI layer.
 
@@ -68,6 +69,10 @@ If the ping fails:
 ---
 
 ## 🧩 Topology 2 – ARP and MAC Address Resolution
+
+For this part we will reuse the existing topology from our 1st exercise.  
+
+> If not done already, make sure to switch back to Realtime if you are still in Simulation mode.  
 
 [PC1] --- [Switch] --- [PC2]
 
@@ -81,8 +86,6 @@ If the ping fails:
 
 ## ⚙️ Step 5. Build and Configure the ARP Network
 
-1. Add two PCs and one switch.  
-2. Connect them using **Copper Straight-Through** cables.  
 3. Configure IP addresses as above.
 
 ---
