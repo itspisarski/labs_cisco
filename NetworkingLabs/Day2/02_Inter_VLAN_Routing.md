@@ -21,23 +21,42 @@ Copy code
 
 ---
 
-## ⚙️ Step 1. Create VLANs on the Switch
+## ⚙️ Step 1. Create VLANs on Both Switches
 
+### On SW1 (Left Switch)
 ```
-Switch(config)# vlan 10
-Switch(config-vlan)# name HR
-Switch(config)# vlan 20
-Switch(config-vlan)# name FINANCE
+SW1(config)# vlan 10
+SW1(config-vlan)# name HR
+SW1(config-vlan)# exit
+SW1(config)# vlan 20
+SW1(config-vlan)# name FINANCE
+SW1(config-vlan)# exit
 ```
-Assign access ports:
-```
-Switch(config)# interface fa0/1
-Switch(config-if)# switchport mode access
-Switch(config-if)# switchport access vlan 10
 
-Switch(config)# interface fa0/2
-Switch(config-if)# switchport mode access
-Switch(config-if)# switchport access vlan 20
+**Assign access port for PC1:**
+```
+SW1(config)# interface fa0/1
+SW1(config-if)# switchport mode access
+SW1(config-if)# switchport access vlan 10
+SW1(config-if)# exit
+```
+
+### On SW2 (Right Switch)  
+```
+SW2(config)# vlan 10
+SW2(config-vlan)# name HR
+SW2(config-vlan)# exit
+SW2(config)# vlan 20
+SW2(config-vlan)# name FINANCE
+SW2(config-vlan)# exit
+```
+
+**Assign access port for PC2:**
+```
+SW2(config)# interface fa0/2
+SW2(config-if)# switchport mode access
+SW2(config-if)# switchport access vlan 20
+SW2(config-if)# exit
 ```
 ---
 
