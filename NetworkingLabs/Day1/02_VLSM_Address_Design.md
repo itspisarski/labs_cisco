@@ -8,6 +8,14 @@
 Each router interface connects to a switch, and each switch connects to a group of PCs.
 
 ---
+## ⚙️ Step 0. Creating the topology in Packet Tracer 
+
+1. Open **Cisco Packet Tracer**.
+2. Add **Three PCs** and **one switch for each PC** (e.g., `2960`). Connect them with Straight-Through cable as usual
+3. Add **One Router**
+4. Connect each switch to the router on one of the gigabit interface, use Straight-Through cable
+> Note the pairing of switch - gigabite interface, it will be usefull for later
+
 
 ## ⚙️ Step 1. Subnet the Network `192.168.100.0/24`
 
