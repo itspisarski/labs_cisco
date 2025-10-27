@@ -21,19 +21,28 @@ In this lab, you will configure VLANs, assign access ports, and enable trunking 
 
 1. Add **2 switches** (2960) and **2 PCs**.  
 2. Connect PC1 and PC2 to their respective switches using **Copper Straight-Through** cables.  
-3. Connect SW1 to SW2 using **FastEthernet0/24**.  
+3. Connect SW1 to SW2 using **FastEthernet0/24** using **Copper Cross-Over** cables.  
 4. Ensure all interfaces show **green links** before proceeding.
-
+> You can use the fast forward button to accelerate the links activation
 ---
 
 ## ⚙️ Step 2. Create VLANs on Both Switches
+
+1. Click switch0 and navigate to the CLI
 ```
+Switch>enable
+Switch#configure terminal
 Switch(config)# vlan 10
 Switch(config-vlan)# name HR
+```
+
+2. Do the same for your other Switch
+```
+Switch>enable
+Switch#configure terminal
 Switch(config)# vlan 20
 Switch(config-vlan)# name FINANCE
 ```
-
 
 > 💡 VLANs 10 and 20 will segment the network into separate broadcast domains.
 
@@ -94,8 +103,75 @@ show interfaces trunk
 
 ## ⚙️ Step 7. Test Connectivity
 
-1. Ping from **PC1 → PC2** (should **fail**; different VLANs).  
-2. Add a new PC to VLAN 10 on SW2 and ping PC1 (should **succeed**).  
+### Test 1: Inter-VLAN Communication (Should Fail)
+1. **On PC1 (VLAN 10):**
+   - Open **Command Prompt** in Packet Tracer
+   - Execute ping command:
+   ```
+   C:\> ping 192.168.20.10
+   ```
+   - **Expected Result:** ❌ **Request timed out** or **Destination host unreachable**
+   - **Why it fails:** PC1 (VLAN 10) and PC2 (VLAN 20) are in different broadcast domains
+
+2. **Verify VLAN isolation:**
+   - Try pinging from PC2 to PC1:
+   ```
+   C:\> ping 192.168.10.10
+   ```
+   - **Expected Result:** ❌ **Should also fail** for the same reason
+
+### Test 2: Intra-VLAN Communication (Should Succeed)
+1. **Add PC3 to SW2:**
+   - Add a third PC to the topology
+   - Connect PC3 to SW2 interface **FastEthernet0/3**
+
+2. **Configure SW2 interface for VLAN 10:**
+   ```
+   SW2(config)# interface fa0/3
+   SW2(config-if)# switchport mode access
+   SW2(config-if)# switchport access vlan 10
+   SW2(config-if)# exit
+   ```
+
+3. **Configure PC3 network settings:**
+   - **IP Address:** 192.168.10.20
+   - **Subnet Mask:** 255.255.255.0
+   - **Default Gateway:** (leave blank for this lab)
+
+4. **Test connectivity within VLAN 10:**
+   - **From PC1 to PC3:**
+   ```
+   C:\> ping 192.168.10.20
+   ```
+   - **Expected Result:** ✅ **Reply from 192.168.10.20** (successful pings)
+   
+   - **From PC3 to PC1:**
+   ```
+   C:\> ping 192.168.10.10
+   ```
+   - **Expected Result:** ✅ **Reply from 192.168.10.10** (successful pings)
+
+5. **Verify PC3 cannot reach VLAN 20:**
+   ```
+   C:\> ping 192.168.20.10
+   ```
+   - **Expected Result:** ❌ **Request timed out** (PC3 in VLAN 10 cannot reach PC2 in VLAN 20)
+
+### Additional Verification Commands
+**On switches, verify the configuration:**
+```
+show vlan brief
+show interfaces fa0/3 switchport
+show mac address-table
+```
+
+### Expected Results Summary
+| Source | Destination | VLAN | Result | Reason |
+|--------|-------------|------|---------|---------|
+| PC1 (VLAN 10) | PC2 (VLAN 20) | Cross-VLAN | ❌ Fail | Different broadcast domains |
+| PC1 (VLAN 10) | PC3 (VLAN 10) | Same VLAN | ✅ Success | Same broadcast domain |
+| PC3 (VLAN 10) | PC2 (VLAN 20) | Cross-VLAN | ❌ Fail | Different broadcast domains |
+   
 
 ---
 
