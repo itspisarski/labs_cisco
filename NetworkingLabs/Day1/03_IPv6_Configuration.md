@@ -49,6 +49,8 @@ Each router connects to a PC on one side (LAN) and to the other router on the op
 On both routers:
 
 ```
+Router>enable
+Router# configure terminal
 Router(config)# ipv6 unicast-routing
 ```
 > This command allows the router to forward IPv6 packets between interfaces.
@@ -67,6 +69,7 @@ Router1# configure terminal
 Router1(config)# interface gigabitEthernet0/0
 Router1(config-if)# ipv6 address 2001:db8:1::1/64
 Router1(config-if)# no shutdown
+Router1(config-if)# exit
 
 # WAN interface
 Router1(config)# interface gigabitEthernet0/1
@@ -178,7 +181,15 @@ If not:
 
 ## ⚙️ Step 8. Observe EUI-64 Address Generation
 
-1. Remove a manual address from an interface:
+1. Select your Router 1 for example, and go to the IOS CLI
+   
+3. Navigate to your interface gigabitEthernet0/0
+```
+Router> enable
+Router# configure terminal
+Router(config)# interface gigabitEthernet0/0
+```
+5. Remove a manual address from an interface:
 ```
 Router(config-if)# no ipv6 address 2001:db8:1::1/64
 ```
