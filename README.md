@@ -15,41 +15,44 @@ This repository contains a comprehensive 5-day networking training program that 
 ## 🗂️ Repository Structure
 
 ```
-NetworkingLabs/
-├── Day1/                           # Network Fundamentals (Cisco)
-│   ├── 00_Cisco_Packet_Tracer_Install.md
-│   ├── 01_Networking_Fundamentals_with_Cisco.md
-│   ├── 02_VLSM_Address_Design.md
-│   ├── 03_IPv6_Configuration.md
-│   ├── 05_Cisco_IOS_Basics.md
-│   ├── 06_IOS_Troubleshooting.md
-│   ├── 07_Arista_EOS_Basics.md
-│   ├── 08_EOS_Automation.md
-│   ├── 10_Network_Diagnostic_Tools.md
-│   └── README_Networking_Labs.md
-├── Day2/                           # Advanced Switching Concepts
-│   ├── 01_VLANS_and_Trunking.md
-│   ├── 02_Inter_VLAN_Routing.md
-│   └── 03_STP_and_Etherchannel.md
-├── Day3/                           # AWS Cloud Networking Basics
-│   ├── 01_Building_a_VPC_Architecture_in_aws.md
-│   ├── 02_AWS_Security_Groups.md
-│   └── 03_AWS_Network_ACLs.md
-├── Day4/                           # DNS and Load Balancing
-│   ├── 01_DNS_Configuration_Route53.md
-│   ├── 02_Load_Balanced_Web_Tier.md
-│   └── 03_VPC_Peering_Hybrid_Connectivity.md
-├── Day5/                           # High Availability & Troubleshooting
-│   ├── 01_Multi_AZ_High_Availability_Web_Application.md
-│   ├── 02_VPN_Failover_and_CloudWatch_Monitoring.md
-│   └── 03_Troubleshooting_Broken_VPC.md
-└── ressources/                     # Supporting Materials
-    └── images.placeholder
+labs_cisco/
+├── NetworkingLabs/
+│   ├── Day1/                       # Network Fundamentals (Cisco)
+│   │   ├── 00_Cisco_Packet_Tracer_Install.md
+│   │   ├── 01_Networking_Fundamentals_with_Cisco.md
+│   │   ├── 02_VLSM_Address_Design.md
+│   │   ├── 03_IPv6_Configuration.md
+│   │   ├── 05_Cisco_IOS_Basics.md
+│   │   ├── 06_IOS_Troubleshooting.md
+│   │   ├── 07_Arista_EOS_Basics.md
+│   │   ├── 08_EOS_Automation.md
+│   │   ├── 10_Network_Diagnostic_Tools.md
+│   │   └── README_Networking_Labs.md
+│   ├── Day2/                       # Advanced Switching Concepts
+│   │   ├── 01_VLANS_and_Trunking.md
+│   │   ├── 02_Inter_VLAN_Routing.md
+│   │   └── 03_STP_and_Etherchannel.md
+│   ├── Day3/                       # AWS Cloud Networking Basics
+│   │   ├── 01_Building_a_VPC_Architecture_in_aws.md
+│   │   ├── 02_AWS_Security_Groups.md
+│   │   └── 03_AWS_Network_ACLs.md
+│   ├── Day4/                       # DNS and Load Balancing
+│   │   ├── 01_DNS_Configuration_Route53.md
+│   │   ├── 02_Load_Balanced_Web_Tier.md
+│   │   └── 03_VPC_Peering_Hybrid_Connectivity.md
+│   ├── Day5/                       # High Availability & Troubleshooting
+│   │   ├── 01_Multi_AZ_High_Availability_Web_Application.md
+│   │   ├── 02_VPN_Failover_and_CloudWatch_Monitoring.md
+│   │   └── 03_Troubleshooting_Broken_VPC.md
+│   └── ressources/                 # Supporting Materials
+│       └── images.placeholder
+└── README.md                       # This file
 ```
 
 ## 📖 Day-by-Day Breakdown
 
 ### **Day 1: Network Fundamentals** 🌐
+**Location:** `NetworkingLabs/Day1/`  
 **Focus:** Traditional networking concepts using Cisco technologies
 
 - **Lab 00:** Cisco Packet Tracer Installation & Setup
@@ -65,6 +68,7 @@ NetworkingLabs/
 **Key Technologies:** Cisco Packet Tracer, IOS, Arista EOS, IPv4/IPv6
 
 ### **Day 2: Advanced Switching** 🔀
+**Location:** `NetworkingLabs/Day2/`  
 **Focus:** Layer 2 switching technologies and protocols
 
 - **Lab 01:** VLANs and Trunking Configuration
@@ -74,6 +78,7 @@ NetworkingLabs/
 **Key Technologies:** VLANs, Trunking, STP, EtherChannel, Layer 3 Switching
 
 ### **Day 3: AWS Cloud Networking Basics** ☁️
+**Location:** `NetworkingLabs/Day3/`  
 **Focus:** Introduction to AWS networking services
 
 - **Lab 01:** Building a VPC Architecture in AWS
@@ -83,6 +88,7 @@ NetworkingLabs/
 **Key Technologies:** AWS VPC, EC2, Security Groups, NACLs, Internet Gateways
 
 ### **Day 4: DNS and Load Balancing** ⚖️
+**Location:** `NetworkingLabs/Day4/`  
 **Focus:** Advanced AWS networking services
 
 - **Lab 08:** Configuring DNS with Amazon Route 53
@@ -92,6 +98,7 @@ NetworkingLabs/
 **Key Technologies:** Route 53, Application Load Balancer, VPC Peering, Target Groups
 
 ### **Day 5: High Availability & Troubleshooting** 🔧
+**Location:** `NetworkingLabs/Day5/`  
 **Focus:** Enterprise-grade resilience and monitoring
 
 - **Lab 11:** Multi-AZ High Availability Web Application
@@ -137,18 +144,29 @@ By completing this lab series, students will:
 1. **Clone this repository:**
    ```bash
    git clone https://github.com/itspisarski/labs_cisco.git
-   cd labs_cisco/NetworkingLabs
+   cd labs_cisco
    ```
 
-2. **Start with Day 1:**
-   - Install Cisco Packet Tracer (Lab 00)
-   - Work through labs sequentially
-   - Complete reflection questions
+2. **Navigate to the labs folder:**
+   ```bash
+   cd NetworkingLabs
+   ```
 
-3. **Progress to AWS (Day 3+):**
-   - Set up AWS account
+3. **Start with Day 1:**
+   ```bash
+   cd Day1
+   # Open 00_Cisco_Packet_Tracer_Install.md to begin
+   ```
+
+4. **Work through each day sequentially:**
+   - Complete all labs in Day1 before moving to Day2
+   - Follow step-by-step instructions in each lab
+   - Complete reflection questions and verification steps
+
+5. **Progress to AWS (Day 3+):**
+   - Set up AWS account before starting Day 3
    - Follow lab instructions step-by-step
-   - Use verification checklists
+   - Use verification checklists to confirm completion
 
 ## 📋 Lab Format
 
@@ -159,6 +177,16 @@ Each lab includes:
 - **🔍 Verification:** Testing and validation procedures
 - **💡 Reflection Questions:** Concept reinforcement
 - **🧠 Key Takeaways:** Summary of important concepts
+
+## 📁 Quick Navigation
+
+| Day | Direct Links |
+|-----|--------------|
+| **Day 1** | [Network Fundamentals](./NetworkingLabs/Day1/) |
+| **Day 2** | [Advanced Switching](./NetworkingLabs/Day2/) |
+| **Day 3** | [AWS Cloud Networking](./NetworkingLabs/Day3/) |
+| **Day 4** | [DNS & Load Balancing](./NetworkingLabs/Day4/) |
+| **Day 5** | [High Availability & Troubleshooting](./NetworkingLabs/Day5/) |
 
 ## 🤝 Contributing
 
@@ -173,6 +201,14 @@ For questions or issues:
 - Review lab prerequisites
 - Check AWS documentation for cloud labs
 - Consult Cisco documentation for traditional networking labs
+
+## 📊 Progress Tracking
+
+- [ ] Day 1: Network Fundamentals (9 labs)
+- [ ] Day 2: Advanced Switching (3 labs)
+- [ ] Day 3: AWS Cloud Networking (3 labs)
+- [ ] Day 4: DNS & Load Balancing (3 labs)
+- [ ] Day 5: High Availability & Troubleshooting (3 labs)
 
 ---
 
