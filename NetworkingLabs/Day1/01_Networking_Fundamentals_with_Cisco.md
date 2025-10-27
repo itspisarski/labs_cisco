@@ -112,9 +112,6 @@ Internet Address Physical Address Type
 ```
 
 
-5. Switch to **Simulation Mode** and replay the ARP request and reply packets.
-
-> 💡 ARP dynamically maps IP addresses to MAC addresses, allowing devices to communicate on a LAN.
 
 ---
 
