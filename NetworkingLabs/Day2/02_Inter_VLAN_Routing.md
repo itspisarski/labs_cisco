@@ -118,6 +118,8 @@ Router(config-if)# no shutdown
 | PC1 | 192.168.10.10 | 255.255.255.0 | 192.168.10.1 |
 | PC2 | 192.168.20.10 | 255.255.255.0 | 192.168.20.1 |
 
+> Use the Config tab and FastEthernet Interface to set IP and subnet
+> Use the Config tab Global Settings to setup the default gateway 
 ---
 
 ## ⚙️ Step 5. Verify Configuration
