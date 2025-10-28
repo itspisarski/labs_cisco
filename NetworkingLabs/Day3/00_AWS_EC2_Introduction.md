@@ -4,25 +4,9 @@
 Introduction to Amazon Web Services (AWS) for networking professionals transitioning from on-premises to cloud infrastructure. You will learn to navigate the AWS Management Console, understand basic AWS concepts, and create your first EC2 instances to prepare for advanced networking labs.
 
 ---
+## Pre-requisites
 
-## 🧩 What is AWS?
-
-**Amazon Web Services (AWS)** is a cloud computing platform that provides:
-- **Compute Services:** Virtual servers (EC2 instances)
-- **Networking:** Virtual Private Clouds (VPCs), subnets, load balancers
-- **Storage:** Elastic Block Store (EBS), Simple Storage Service (S3)
-- **Security:** Identity and Access Management (IAM), Security Groups
-
-### Traditional vs. Cloud Infrastructure
-| Traditional On-Premises | AWS Cloud Equivalent |
-|------------------------|---------------------|
-| Physical Server | EC2 Instance |
-| Network Switch | VPC Subnet |
-| VLAN | Security Group |
-| Router | Route Table + Internet Gateway |
-| Firewall | Network ACL + Security Group |
-
----
+Make sure to use the credentials provided by the instructor to access your aws platform.
 
 
 ## ⚙️ Step 1. Navigate the AWS Management Console
