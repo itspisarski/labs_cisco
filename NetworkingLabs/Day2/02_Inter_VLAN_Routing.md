@@ -79,6 +79,10 @@ SW1(config)# interface fa0/24
 SW1(config-if)# switchport mode trunk
 SW1(config-if)# switchport trunk allowed vlan 10,20
 SW1(config-if)# exit
+SW1(config)# interface fa0/23
+SW1(config-if)# switchport mode trunk
+SW1(config-if)# switchport trunk allowed vlan 10,20
+SW1(config-if)# exit
 ```
 
 ### On SW2 (Trunk to SW1)
