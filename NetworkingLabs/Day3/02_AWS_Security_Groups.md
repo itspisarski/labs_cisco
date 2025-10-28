@@ -31,7 +31,7 @@ Confirm:
 - PrivateSubnetB → 10.0.2.0/24  
 - WebServer (public) and DBServer (private) are running  
 
-If not, create these resources as per **Lab 05**.
+If not, create these resources as per **Lab 01**.
 
 ---
 
@@ -68,8 +68,12 @@ If not, create these resources as per **Lab 05**.
 | WebServer | WebServerSG |
 | DBServer | DBServerSG |
 
+You will need to create 2 instances in EC2.  
+
 To assign:
 - In EC2 console, select the instance → **Actions → Security → Change Security Groups** → choose accordingly.
+
+
 
 ---
 
