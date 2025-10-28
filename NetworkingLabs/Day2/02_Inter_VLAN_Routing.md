@@ -7,17 +7,28 @@ Configure inter-VLAN routing using a single router interface with multiple subin
 
 ## 🧩 Topology
 ```
-[PC1]--[SW1]--[Router]--[SW2]--[PC2]
+[PC1]--Fa0/1--[SW1]--Fa0/24--[Router G0/0]
+               |                    |
+            Fa0/23              Subinterfaces:
+               |               G0/0.10 (VLAN 10)
+[PC2]--Fa0/2--[SW2]            G0/0.20 (VLAN 20)
 ```
-yaml
-Copy code
 
+### Connection Details
+| Source Device | Source Port | Destination Device | Destination Port |
+|---------------|-------------|-------------------|------------------|
+| PC1 | NIC | SW1 | Fa0/1 |
+| SW1 | Fa0/23 | SW2 | Fa0/23 |
+| SW1 | Fa0/24 | Router | G0/0 |
+| PC2 | NIC | SW2 | Fa0/2 |
+
+### IP Address Assignment
 | Device | VLAN | Subnet | IP Address |
 |---------|------|---------|-------------|
 | PC1 | VLAN 10 | 192.168.10.0/24 | 192.168.10.10 |
 | PC2 | VLAN 20 | 192.168.20.0/24 | 192.168.20.10 |
-| Router (G0/0.10) | VLAN 10 | 192.168.10.1 |
-| Router (G0/0.20) | VLAN 20 | 192.168.20.1 |
+| Router (G0/0.10) | VLAN 10 | 192.168.10.0/24 | 192.168.10.1 |
+| Router (G0/0.20) | VLAN 20 | 192.168.20.0/24 | 192.168.20.1 |
 
 ---
 
@@ -60,12 +71,25 @@ SW2(config-if)# exit
 ```
 ---
 
-## ⚙️ Step 2. Configure the Trunk Between Switch and Router
+## ⚙️ Step 2. Configure the Trunk Links
 
+### On SW1 (Trunk to Router)
 ```
-Switch(config)# interface fa0/24
-Switch(config-if)# switchport mode trunk
+SW1(config)# interface fa0/24
+SW1(config-if)# switchport mode trunk
+SW1(config-if)# switchport trunk allowed vlan 10,20
+SW1(config-if)# exit
 ```
+
+### On SW2 (Trunk to SW1)
+```
+SW2(config)# interface fa0/23
+SW2(config-if)# switchport mode trunk
+SW2(config-if)# switchport trunk allowed vlan 10,20
+SW2(config-if)# exit
+```
+
+> 💡 **Note:** SW1's Fa0/24 connects to Router, SW2's Fa0/23 connects to SW1's Fa0/23
 ---
 
 ## ⚙️ Step 3. Configure Router Subinterfaces (ROAS)
@@ -121,9 +145,11 @@ Router(config-if)# no shutdown
    - **Expected:** Connected routes for both VLAN subnets
 
 ### Switch Verification
+
+#### On SW1 (Left Switch)
 1. **Verify VLAN database:**
    ```
-   Switch# show vlan brief
+   SW1# show vlan brief
    ```
    - **Expected Output:**
    ```
@@ -131,49 +157,102 @@ Router(config-if)# no shutdown
    ---- -------------------------------- --------- -------------------------------
    1    default                          active    Fa0/3, Fa0/4, Fa0/5, ...
    10   HR                              active    Fa0/1
-   20   FINANCE                         active    Fa0/2
+   20   FINANCE                         active    
    ```
 
-2. **Check trunk configuration:**
+2. **Check trunk to router:**
    ```
-   Switch# show interfaces fa0/24 trunk
+   SW1# show interfaces fa0/24 trunk
    ```
    - **Expected:** VLANs 1,10,20 should be allowed and active
 
-3. **Verify port assignments:**
+3. **Verify PC1 port assignment:**
    ```
-   Switch# show interfaces fa0/1 switchport
-   Switch# show interfaces fa0/2 switchport
+   SW1# show interfaces fa0/1 switchport
    ```
-   - **Check:** Mode should be "access" and VLAN assignment correct
+   - **Check:** Mode should be "access" and assigned to VLAN 10
+
+#### On SW2 (Right Switch)
+1. **Verify VLAN database:**
+   ```
+   SW2# show vlan brief
+   ```
+   - **Expected Output:**
+   ```
+   VLAN Name                             Status    Ports
+   ---- -------------------------------- --------- -------------------------------
+   1    default                          active    Fa0/3, Fa0/4, Fa0/5, ...
+   10   HR                              active    
+   20   FINANCE                         active    Fa0/2
+   ```
+
+2. **Check trunk to SW1:**
+   ```
+   SW2# show interfaces fa0/23 trunk
+   ```
+   - **Expected:** VLANs 1,10,20 should be allowed and active
+
+3. **Verify PC2 port assignment:**
+   ```
+   SW2# show interfaces fa0/2 switchport
+   ```
+   - **Check:** Mode should be "access" and assigned to VLAN 20
 
 ### Detailed Trunk Verification
+
+#### On SW1 (Check trunk to Router):
 ```
-Switch# show interfaces trunk
+SW1# show interfaces trunk
 ```
-- **Expected Output:**
+- **Expected Output for SW1:**
 ```
 Port        Mode         Encapsulation  Status        Native vlan
+Fa0/23      on           802.1q         trunking      1
 Fa0/24      on           802.1q         trunking      1
 
 Port        Vlans allowed on trunk
-Fa0/24      1-4094
+Fa0/23      10,20
+Fa0/24      10,20
 
 Port        Vlans allowed and active in management domain
-Fa0/24      1,10,20
+Fa0/23      10,20
+Fa0/24      10,20
 
 Port        Vlans in spanning tree forwarding state
-Fa0/24      1,10,20
+Fa0/23      10,20
+Fa0/24      10,20
+```
+
+#### On SW2 (Check trunk to SW1):
+```
+SW2# show interfaces trunk
+```
+- **Expected Output for SW2:**
+```
+Port        Mode         Encapsulation  Status        Native vlan
+Fa0/23      on           802.1q         trunking      1
+
+Port        Vlans allowed on trunk
+Fa0/23      10,20
+
+Port        Vlans allowed and active in management domain
+Fa0/23      10,20
+
+Port        Vlans in spanning tree forwarding state
+Fa0/23      10,20
 ```
 
 ### Configuration Checklist
-| Component | Command | What to Verify | Status |
-|-----------|---------|----------------|---------|
-| Router Physical Interface | `show ip int brief` | G0/0 is up/up | ✅ |
-| Router Subinterfaces | `show ip int brief` | G0/0.10 and G0/0.20 up/up | ✅ |
-| VLAN Creation | `show vlan brief` | VLANs 10,20 exist and active | ✅ |
-| Access Ports | `show int fa0/X switchport` | Correct VLAN assignment | ✅ |
-| Trunk Port | `show int trunk` | Fa0/24 trunking VLANs 10,20 | ✅ |
+| Device | Component | Command | What to Verify | Status |
+|--------|-----------|---------|----------------|---------|
+| **Router** | Physical Interface | `show ip int brief` | G0/0 is up/up | ✅ |
+| **Router** | Subinterfaces | `show ip int brief` | G0/0.10 and G0/0.20 up/up | ✅ |
+| **SW1** | VLAN Creation | `show vlan brief` | VLANs 10,20 exist and active | ✅ |
+| **SW1** | Access Port PC1 | `show int fa0/1 switchport` | Assigned to VLAN 10 | ✅ |
+| **SW1** | Trunk to Router | `show int fa0/24 trunk` | Trunking VLANs 10,20 | ✅ |
+| **SW2** | VLAN Creation | `show vlan brief` | VLANs 10,20 exist and active | ✅ |
+| **SW2** | Access Port PC2 | `show int fa0/2 switchport` | Assigned to VLAN 20 | ✅ |
+| **SW2** | Trunk to SW1 | `show int fa0/23 trunk` | Trunking VLANs 10,20 | ✅ |
 
 ✅ **All components must be properly configured before testing connectivity.**
 
