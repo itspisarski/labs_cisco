@@ -25,7 +25,7 @@ You'll secure a web server and a database server within a VPC and observe how SG
 
 ## ⚙️ Step 1 – Verify Existing VPC Setup
 
-If you completed **Lab 05**, use the same VPC.  
+If you completed **Lab 01**, use the same VPC.  
 Confirm:
 - PublicSubnetA → 10.0.1.0/24  
 - PrivateSubnetB → 10.0.2.0/24  
@@ -118,11 +118,6 @@ http://<WebServer_Public_IP>
 
 ---
 
-## 💡 Reflection Questions
-
-- Why do we reference another **Security Group** as a source instead of IPs?  
-- What happens if outbound rules are restricted?  
-- How does this differ from a traditional on-prem firewall rule?
 
 ---
 
