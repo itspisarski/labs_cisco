@@ -108,5 +108,3 @@ http://trainingalb-xxxx.elb.amazonaws.com
 - Why use multiple AZs instead of one?
 
 ---
-
-**End of Lab 09 – Load Balancing in AWS**

@@ -53,11 +53,24 @@ You will create **two subnets**, each in a **different Availability Zone (AZ)** 
 ### Steps
 1. In the **VPC Dashboard**, go to **Subnets → Create Subnet**.  
 2. Choose `TrainingVPC`.  
-3. Add **PublicSubnetA** in `us-east-1a` with `10.0.1.0/24`.  
-4. Add **PrivateSubnetB** in `us-east-1b` with `10.0.2.0/24`.  
-5. Save both subnets.
+3. Add **PublicSubnetA**:
+   - **Subnet name:** `PublicSubnetA`
+   - **Availability Zone:** `us-east-1a` (or your region's first AZ)
+   - **IPv4 CIDR block:** `10.0.1.0/24`
+4. Add **PrivateSubnetB**:
+   - **Subnet name:** `PrivateSubnetB` 
+   - **Availability Zone:** `us-east-1b` (or your region's second AZ)
+   - **IPv4 CIDR block:** `10.0.2.0/24`
+5. Click **Create subnet**.
 
-✅ **Result:** Your VPC now has two isolated network zones.
+### 🔧 Enable Auto-Assign Public IP (IMPORTANT)
+6. **Select PublicSubnetA** → **Actions → Edit subnet settings**
+7. **Check the box:** "Enable auto-assign public IPv4 address"
+8. Click **Save**
+
+> ⚠️ **Critical Step:** Without this setting, EC2 instances launched in the public subnet won't receive public IP addresses automatically.
+
+✅ **Result:** Your VPC now has two isolated network zones, with the public subnet configured to auto-assign public IPs.
 
 ---
 
@@ -103,19 +116,76 @@ You will use two route tables: one for **public** and one for **private** subnet
 | WebServer | PublicSubnetA | Amazon Linux 2 | t2.micro | Existing or new | Allow SSH (22), HTTP (80) |
 | DBServer | PrivateSubnetB | Amazon Linux 2 | t2.micro | Existing or new | Allow SSH (22) from WebServer only |
 
-### Launch Steps
-1. Go to **EC2 → Launch Instance**.  
-2. Configure as per the table above.  
-3. Assign each instance to the correct subnet.  
-4. For the WebServer:
-   - Enable **Auto-assign Public IP**.
-5. For the DBServer:
-   - Disable **Auto-assign Public IP**.
-6. Review and launch both.
+### Detailed Launch Steps
+
+#### Launch WebServer (Public Subnet)
+1. **Go to EC2 → Launch Instance**
+2. **Name:** `WebServer`
+3. **AMI:** Amazon Linux 2023 (or Amazon Linux 2)
+4. **Instance type:** t2.micro
+5. **Key pair:** Create new or select existing
+6. **Network settings → Edit:**
+   - **VPC:** `TrainingVPC`
+   - **Subnet:** `PublicSubnetA`
+   - **Auto-assign public IP:** **Enable** ✅
+7. **Security Group → Create new:**
+   - **Name:** `WebServerSG`
+   - **Rules:**
+     - SSH (22) from My IP
+     - HTTP (80) from Anywhere (0.0.0.0/0)
+8. **Launch instance**
+
+#### Launch DBServer (Private Subnet)  
+1. **Go to EC2 → Launch Instance**
+2. **Name:** `DBServer`
+3. **AMI:** Amazon Linux 2023 (or Amazon Linux 2)
+4. **Instance type:** t2.micro
+5. **Key pair:** Same as WebServer
+6. **Network settings → Edit:**
+   - **VPC:** `TrainingVPC`
+   - **Subnet:** `PrivateSubnetB`
+   - **Auto-assign public IP:** **Disable** ❌
+7. **Security Group → Create new:**
+   - **Name:** `DBServerSG`
+   - **Rules:**
+     - SSH (22) from WebServerSG (select security group)
+8. **Launch instance**
+
+### 🔍 Verify IP Assignment
+After launch, check **EC2 → Instances:**
+- **WebServer:** Should show both **Private IP** (10.0.1.x) and **Public IP**
+- **DBServer:** Should show only **Private IP** (10.0.2.x), no public IP
+
+### 🚨 If WebServer Still Has No Public IP
+
+**The auto-assign setting only applies to NEW instances launched after enabling it.**
+
+#### Option 1: Allocate and Associate Elastic IP (Recommended)
+1. **Go to EC2 → Elastic IPs → Allocate Elastic IP address**
+2. **Click "Allocate"** (keep default settings)
+3. **Select the new Elastic IP → Actions → Associate Elastic IP address**
+4. **Configure:**
+   - **Resource type:** Instance
+   - **Instance:** Select your WebServer
+   - **Private IP address:** Select the instance's private IP
+5. **Click "Associate"**
+
+#### Option 2: Relaunch the Instance
+1. **Terminate the existing WebServer instance**
+2. **Launch a new instance** following the same steps
+3. **The new instance will get a public IP automatically**
+
+#### Option 3: Manual Assignment During Instance Modification
+**Note:** You cannot directly assign a public IP to a running instance without using Elastic IPs.
+
+### Verify After Fix
+**Go to EC2 → Instances and confirm:**
+- **WebServer:** Now shows **Public IPv4 address** field populated
+- **Status:** Both instances show "Running" state
 
 ✅ **Result:**  
-- WebServer will be publicly accessible.  
-- DBServer will be isolated within the private subnet.
+- WebServer will be publicly accessible via its public IP
+- DBServer will be isolated within the private subnet
 
 ---
 
@@ -151,7 +221,69 @@ This confirms that the private subnet has **no internet access**.
 
 ---
 
-## 💡 Reflection Questions
+## � Troubleshooting Common Issues
+
+### Issue: EC2 Instance Has No Public IP Address
+
+**Problem:** When launching EC2 instances in the public subnet, they don't receive a public IP.
+
+**Solution:**
+1. **Check subnet settings:**
+   ```
+   VPC Dashboard → Subnets → Select PublicSubnetA → Actions → Edit subnet settings
+   ```
+   - ✅ "Enable auto-assign public IPv4 address" should be **checked**
+
+2. **Alternative - Manually assign during launch:**
+   - During EC2 launch → **Network settings** → **Auto-assign public IP** → Select **Enable**
+
+### Issue: Cannot SSH to WebServer
+
+**Possible Causes & Solutions:**
+
+1. **Security Group Issue:**
+   - Go to **EC2 → Security Groups**
+   - Ensure SSH (port 22) is allowed from your public IP
+   - Rule: `SSH | TCP | 22 | My IP`
+
+2. **Route Table Issue:**
+   - **VPC → Route Tables → PublicRT**
+   - Verify route: `0.0.0.0/0 → IGW`
+
+3. **Internet Gateway Issue:**
+   - **VPC → Internet Gateways**
+   - Ensure `TrainingIGW` is **attached** to `TrainingVPC`
+
+### Issue: Private Instance Cannot Reach Public Instance
+
+**Solution:**
+- Check **Security Groups** on both instances
+- Private instance SG should allow outbound traffic
+- Public instance SG should allow inbound from private subnet CIDR (10.0.2.0/24)
+
+### Verification Commands for Troubleshooting
+
+**Check subnet configuration:**
+```bash
+# In AWS CLI (optional)
+aws ec2 describe-subnets --subnet-ids subnet-xxxxx
+```
+
+**Test connectivity from EC2:**
+```bash
+# Test internet connectivity
+curl -I http://google.com
+
+# Test internal connectivity  
+ping 10.0.2.10
+
+# Check routing
+ip route show
+```
+
+---
+
+## �💡 Reflection Questions
 
 - What AWS components replace switches and routers from your Day 2 labs?  
 - Why is it important to separate public and private subnets?  

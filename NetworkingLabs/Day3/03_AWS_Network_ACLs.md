@@ -125,4 +125,3 @@ ssh ec2-user@10.0.2.10
 
 ---
 
-**End of Lab 07 – AWS Network ACLs**

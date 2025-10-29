@@ -98,5 +98,3 @@ Use **VPC Reachability Analyzer**:
 - What are use cases for **PrivateLink**?
 
 ---
-
-**End of Lab 10 – VPC Peering and Hybrid Connectivity**
