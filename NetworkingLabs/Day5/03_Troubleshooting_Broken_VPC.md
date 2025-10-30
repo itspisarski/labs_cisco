@@ -87,7 +87,7 @@ Internet
 
 10. **Launch instances:**
     - **WebServer1:** PublicSubnet, use WebSG
-    - **WebServer2:** PrivateSubnet, use WebSG  
+    - **WebServer2:** PrivateSubnet, use WebSG
     - **TestServer:** PartnerVPC subnet, use TestSG
 
 ### Install Web Server Software

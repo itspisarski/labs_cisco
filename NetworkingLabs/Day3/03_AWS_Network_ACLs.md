@@ -69,6 +69,8 @@ You'll implement explicit allow and deny rules and compare their behavior to Sec
    |---------|------|-----------|-------|--------------|------------|
    | 100 | ALL | ALL | ALL | 0.0.0.0/0 | ALLOW |
 
+> **Note:** Outbound rules are stateless; you must explicitly allow return traffic on all ports
+
 4. Associate this NACL with **PrivateSubnetB**.
 
 ---

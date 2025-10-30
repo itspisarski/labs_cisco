@@ -18,11 +18,11 @@ Internet ⇄ ALB │ HTTP:80    │
 
 ---
 
-## ⚙️ Step 1 – Launch Two Web Servers
+## ⚙️ Step 1 – Launch One new Web Server and reuse the existing one
 
 1. Use your **TrainingVPC** from Day 3 labs.  
-2. Launch two **EC2 instances** (Amazon Linux 2, t2.micro).  
-3. Place each in a **different Availability Zone**.  
+2. Launch one **EC2 instance** name it **WebServer2** (Amazon Linux 2, t2.micro).  
+3. Place it in a **different Availability Zone** than the existing one **WebServer**.  
 4. Configure user data:
 
 ```bash
