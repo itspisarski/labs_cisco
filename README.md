@@ -6,9 +6,9 @@ This repository contains a comprehensive 5-day networking training program that 
 
 | Day | Focus Area | Technology Stack | Lab Count |
 |-----|------------|------------------|-----------|
-| **Day 1** | Network Fundamentals | Cisco Packet Tracer, IOS, Arista EOS | 9 Labs |
+| **Day 1** | Network Fundamentals | Cisco Packet Tracer, IOS, Arista EOS | 3 Labs |
 | **Day 2** | Advanced Switching | VLANs, Trunking, STP, EtherChannel | 3 Labs |
-| **Day 3** | AWS Cloud Networking | VPC, Security Groups, NACLs | 3 Labs |
+| **Day 3** | AWS Cloud Networking | AWS, VPC, Security Groups, NACLs | 4 Labs |
 | **Day 4** | DNS & Load Balancing | Route 53, ALB, VPC Peering | 3 Labs |
 | **Day 5** | High Availability & Monitoring | Auto Scaling, VPN, CloudWatch | 3 Labs |
 
