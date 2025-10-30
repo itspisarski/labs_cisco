@@ -20,10 +20,15 @@ Internet ⇄ ALB │ HTTP:80    │
 
 ## ⚙️ Step 1 – Launch One new Web Server and reuse the existing one
 
-1. Use your **TrainingVPC** from Day 3 labs.  
-2. Launch one **EC2 instance** name it **WebServer2** (Amazon Linux 2, t2.micro).  
-3. Place it in a **different Availability Zone** than the existing one **WebServer**.  
-4. Configure user data:
+1. Use your **TrainingVPC** from Day 3 labs.
+2. Add a new public subnet :
+   - **Subnet name:** `PublicSubnetB` 
+   - **Availability Zone:** `us-east-1b` (or your region's second AZ)
+   - **IPv4 CIDR block:** `10.0.2.0/24`
+   - Select Auto Assign IPv4 adress 
+4. Launch one new **EC2 instance** name it **WebServer2** (Amazon Linux 2, t2.micro).
+5. Edit VPC and assign TrainingVPC and subnet **PublicSubnetB**
+6. Configure user data on bot **Webserver2** and **Webserver**:
 
 ```bash
 #!/bin/bash
@@ -33,7 +38,8 @@ sudo systemctl start httpd
 sudo systemctl enable httpd
 ```
 
-5. Assign both to the **PublicSubnetA** and **PublicSubnetB**.
+> This will install a basic http server to enable testing of our loadbalancer !
+
 
 ---
 
