@@ -1,0 +1,29 @@
+
+
+| Name                      | Username    | Virtual Machine Password | Student Email                                                                     | Email Password | Virtual Machine Portal                        |
+| ------------------------- | ----------- | ------------------------ | --------------------------------------------------------------------------------- | -------------- | --------------------------------------------- |
+| Pankaj Kumar              | WSAUTO25-01 | TEKwsauto25!             | [student001_OC010@opscosolutions.com](mailto:student001_OC010@opscosolutions.com) | Welcome2025!   | [Ablaze Portal](https://my.ablazedesktop.com) |
+| Annette Au                | WSAUTO25-02 | TEKwsauto25!             | [student002_OC010@opscosolutions.com](mailto:student002_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Karen Ann Joseph          | WSAUTO25-03 | TEKwsauto25!             | [student003_OC010@opscosolutions.com](mailto:student003_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Lyon LI                   | WSAUTO25-04 | TEKwsauto25!             | [student004_OC010@opscosolutions.com](mailto:student004_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Keith Ng                  | WSAUTO25-05 | TEKwsauto25!             | [student005_OC010@opscosolutions.com](mailto:student005_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Yusuke Sawa               | WSAUTO25-06 | TEKwsauto25!             | [student006_OC010@opscosolutions.com](mailto:student006_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Eugene Su                 | WSAUTO25-07 | TEKwsauto25!             | [student007_OC010@opscosolutions.com](mailto:student007_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Manimohan Amam            | WSAUTO25-08 | TEKwsauto25!             | [student008_OC010@opscosolutions.com](mailto:student008_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Rai Ricafrente Borlas     | WSAUTO25-09 | TEKwsauto25!             | [student009_OC010@opscosolutions.com](mailto:student009_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Wen Feng Chua             | WSAUTO25-10 | TEKwsauto25!             | [student010_OC010@opscosolutions.com](mailto:student010_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Geralyn Goh Soo Chi       | WSAUTO25-11 | TEKwsauto25!             | [student011_OC010@opscosolutions.com](mailto:student011_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Chetan Dilip Gote         | WSAUTO25-12 | TEKwsauto25!             | [student012_OC010@opscosolutions.com](mailto:student012_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Pramod Goyal              | WSAUTO25-13 | TEKwsauto25!             | [student013_OC010@opscosolutions.com](mailto:student013_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| AnilKumar Inkollu         | WSAUTO25-14 | TEKwsauto25!             | [student014_OC010@opscosolutions.com](mailto:student014_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Praveen Kumar Kamala      | WSAUTO25-15 | TEKwsauto25!             | [student015_OC010@opscosolutions.com](mailto:student015_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Balasubramanian Kannan    | WSAUTO25-16 | TEKwsauto25!             | [student016_OC010@opscosolutions.com](mailto:student016_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Jack Lau                  | WSAUTO25-17 | TEKwsauto25!             | [student017_OC010@opscosolutions.com](mailto:student017_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Lenson Lim                | WSAUTO25-18 | TEKwsauto25!             | [student018_OC010@opscosolutions.com](mailto:student018_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Amol Arun Magar           | WSAUTO25-19 | TEKwsauto25!             | [student019_OC010@opscosolutions.com](mailto:student019_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Raj Murugan               | WSAUTO25-20 | TEKwsauto25!             | [student020_OC010@opscosolutions.com](mailto:student020_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Shiva Nooka               | WSAUTO25-21 | TEKwsauto25!             | [student021_OC010@opscosolutions.com](mailto:student021_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Ramkishan Rao Padidela    | WSAUTO25-22 | TEKwsauto25!             | [student022_OC010@opscosolutions.com](mailto:student022_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Troy Michael Parry        | WSAUTO25-23 | TEKwsauto25!             | [student023_OC010@opscosolutions.com](mailto:student023_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| P.S. Ramanathan Periasamy | WSAUTO25-24 | TEKwsauto25!             | [student024_OC010@opscosolutions.com](mailto:student024_OC010@opscosolutions.com) | Welcome2025!   |                                               |
+| Amit Shinde               | WSAUTO25-25 | TEKwsauto25!             | [student025_OC010@opscosolutions.com](mailto:student025_OC010@opscosolutions.com) | Welcome2025!   |                                               |
